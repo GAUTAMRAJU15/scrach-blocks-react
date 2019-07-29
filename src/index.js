@@ -1,15 +1,5 @@
-import BlocklyEditor from './BlocklyEditor';
-import BlocklyToolbox from './BlocklyToolbox';
-import BlocklyToolboxBlock from './BlocklyToolboxBlock';
-import BlocklyToolboxCategory from './BlocklyToolboxCategory';
-import BlocklyWorkspace from './BlocklyWorkspace';
+import React from "react";
+import ReactDOM from "react-dom";
+import Blockly from "./Container";
 
-const ReactBlocklyComponent = {
-  BlocklyEditor,
-  BlocklyToolbox,
-  BlocklyToolboxBlock,
-  BlocklyToolboxCategory,
-  BlocklyWorkspace,
-};
-
-export default ReactBlocklyComponent;
+ReactDOM.render(<Blockly />, document.getElementById("blocklyroot"));
