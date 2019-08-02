@@ -63,9 +63,9 @@ class BlocklyEditor extends React.Component {
     if (this.props.xmlDidChange) {
       if (typeof console !== "undefined") {
         // eslint-disable-next-line no-console
-        console.error(
-          "Warning: xmlDidChange is deprecated and will be removed in future versions! Please use workspaceDidChange instead."
-        );
+        // console.error(
+        //   // "Warning: xmlDidChange is deprecated and will be removed in future versions! Please use workspaceDidChange instead."
+        // );
       }
     }
   };

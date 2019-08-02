@@ -2,22 +2,24 @@
  * @param {string} xml
  */
 export default function parseWorkspaceXml(xml) {
-  const arrayTags = ['name', 'custom', 'colour', 'categories', 'blocks'];
+  const arrayTags = ["name", "custom", "colour", "categories", "blocks"];
   let xmlDoc = null;
   if (window.DOMParser) {
-    xmlDoc = (new DOMParser()).parseFromString(xml, 'text/xml');
+    xmlDoc = new DOMParser().parseFromString(xml, "text/xml");
   } else if (window.ActiveXObject) {
-    xmlDoc = new ActiveXObject('Microsoft.XMLDOM');
+    xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
     xmlDoc.async = false;
     if (!xmlDoc.loadXML(xml)) {
-      throw new Error(`${xmlDoc.parseError.reason} ${xmlDoc.parseError.srcText}`);
+      throw new Error(
+        `${xmlDoc.parseError.reason} ${xmlDoc.parseError.srcText}`
+      );
     }
   } else {
-    throw new Error('cannot parse xml string!');
+    throw new Error("cannot parse xml string!");
   }
 
   function isArray(o) {
-    return Object.prototype.toString.apply(o) === '[object Array]';
+    return Object.prototype.toString.apply(o) === "[object Array]";
   }
 
   /**
@@ -25,10 +27,10 @@ export default function parseWorkspaceXml(xml) {
    * @param {Array.<string>} result
    */
   function parseNode(xmlNode, result) {
-    if (xmlNode.nodeName === '#text') {
+    if (xmlNode.nodeName === "#text") {
       const v = xmlNode.nodeValue;
       if (v.trim()) {
-        result['value'] = v;
+        result["value"] = v;
       }
       return;
     }
@@ -71,6 +73,7 @@ function transformed(result) {
   const filteredResult = [];
   const xml = result["xml"];
   const categories = xml["category"];
+  console.log(categories, "//");
   for (let i = 0; i < categories.length; i++) {
     const c = categories[i];
     const cNew = {};
@@ -144,7 +147,7 @@ function parseObject(obj) {
   if (obj.mutation) {
     res.mutation = {
       attributes: obj.mutation,
-      innerContent: obj.mutation.value,
+      innerContent: obj.mutation.value
     };
   }
   if (obj.field) {
@@ -158,7 +161,7 @@ function parseObject(obj) {
   }
   if (obj.statement) {
     res.statements = {
-      [obj.statement.name]: parseObject(obj.statement),
+      [obj.statement.name]: parseObject(obj.statement)
     };
   }
 

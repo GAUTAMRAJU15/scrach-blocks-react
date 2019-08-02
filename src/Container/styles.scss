@@ -1,0 +1,32 @@
+.blocklyToolboxDiv {
+  background-color: #202020 !important;
+  color: #fff !important;
+
+  .blocklyTreeRow {
+    &:hover {
+      color: #000;
+      cursor: pointer;
+    }
+  }
+}
+.blocklyTrash {
+  opacity: 1 !important;
+}
+
+.blocklyZoom {
+  & > image {
+    opacity: 0.5 !important;
+  }
+}
+
+.blocklyFlyoutBackground {
+  fill: #00000069 !important;
+  fill-opacity: 0.8 !important;
+}
+
+.codeblocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}

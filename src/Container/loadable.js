@@ -10,6 +10,7 @@ const LoadableComponent = Loadable({
 
 export default class DraggerLazyLoad extends React.Component {
   render() {
+    console.log("inside draggerlazyload");
     return <LoadableComponent />;
   }
 }

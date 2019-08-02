@@ -1,8 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import React from "react";
+import PropTypes from "prop-types";
+import ImmutablePropTypes from "react-immutable-proptypes";
 
 class BlocklyToolboxBlock extends React.PureComponent {
   static propTypes = {
@@ -14,8 +14,8 @@ class BlocklyToolboxBlock extends React.PureComponent {
     next: ImmutablePropTypes.map,
     mutation: ImmutablePropTypes.mapContains({
       attributes: ImmutablePropTypes.map,
-      innerContent: PropTypes.string,
-    }),
+      innerContent: PropTypes.string
+    })
   };
 
   static defaultProps = {
@@ -24,30 +24,30 @@ class BlocklyToolboxBlock extends React.PureComponent {
     values: null,
     statements: null,
     next: null,
-    mutation: null,
+    mutation: null
   };
 
   static renderBlock = (block, key) => (
     <BlocklyToolboxBlock
-      type={block.get('type')}
+      type={block.get("type")}
       key={key}
-      fields={block.get('fields')}
-      values={block.get('values')}
-      statements={block.get('statements')}
-      mutation={block.get('mutation')}
-      shadow={block.get('shadow')}
-      next={block.get('next')}
+      fields={block.get("fields")}
+      values={block.get("values")}
+      statements={block.get("statements")}
+      mutation={block.get("mutation")}
+      shadow={block.get("shadow")}
+      next={block.get("next")}
     />
   );
 
   componentDidMount = () => {
     if (this.props.mutation) {
-      this.props.mutation.get('attributes').forEach((value, attributeName) => {
+      this.props.mutation.get("attributes").forEach((value, attributeName) => {
         this.mutationElement.setAttribute(attributeName, value);
         return true;
       });
     }
-  }
+  };
 
   render = () => {
     let fields = [];
@@ -57,45 +57,56 @@ class BlocklyToolboxBlock extends React.PureComponent {
     let nextBlock = null;
 
     if (this.props.fields) {
-      fields = this.props.fields.map((fieldValue, fieldName, i) => (
-        <field name={fieldName} key={`field_${fieldName}_${i}`}>
-          {fieldValue}
-        </field>
-      )).valueSeq();
+      fields = this.props.fields
+        .map((fieldValue, fieldName, i) => (
+          <field name={fieldName} key={`field_${fieldName}_${i}`}>
+            {fieldValue}
+          </field>
+        ))
+        .valueSeq();
     }
 
     if (this.props.values) {
-      values = this.props.values.map((valueBlock, valueName, i) => (
-        <value name={valueName} key={`value_${valueName}_${i}`}>
-          {BlocklyToolboxBlock.renderBlock(valueBlock)}
-        </value>
-      )).valueSeq();
+      values = this.props.values
+        .map((valueBlock, valueName, i) => (
+          <value name={valueName} key={`value_${valueName}_${i}`}>
+            {BlocklyToolboxBlock.renderBlock(valueBlock)}
+          </value>
+        ))
+        .valueSeq();
     }
 
     if (this.props.statements) {
-      statements = this.props.statements.map((statementBlock, statementName, i) => (
-        <statement name={statementName} key={`statement_${statementName}_${i}`}>
-          {BlocklyToolboxBlock.renderBlock(statementBlock)}
-        </statement>
-      )).valueSeq();
+      statements = this.props.statements
+        .map((statementBlock, statementName, i) => (
+          <statement
+            name={statementName}
+            key={`statement_${statementName}_${i}`}
+          >
+            {BlocklyToolboxBlock.renderBlock(statementBlock)}
+          </statement>
+        ))
+        .valueSeq();
     }
 
     if (this.props.mutation) {
-      mutation = ((
+      mutation = (
         <mutation
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: this.props.mutation.get('innerContent') }}
-          ref={(mutationElement) => { this.mutationElement = mutationElement; }}
+          dangerouslySetInnerHTML={{
+            __html: this.props.mutation.get("innerContent")
+          }}
+          ref={mutationElement => {
+            this.mutationElement = mutationElement;
+          }}
         />
-      ));
+      );
     }
 
     if (this.props.next) {
-      nextBlock = ((
-        <next>
-          {BlocklyToolboxBlock.renderBlock(this.props.next)}
-        </next>
-      ));
+      nextBlock = (
+        <next>{BlocklyToolboxBlock.renderBlock(this.props.next)}</next>
+      );
     }
 
     if (this.props.shadow) {
@@ -119,7 +130,7 @@ class BlocklyToolboxBlock extends React.PureComponent {
         {nextBlock}
       </block>
     );
-  }
+  };
 }
 
 export default BlocklyToolboxBlock;

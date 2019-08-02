@@ -9,3 +9,4 @@
 .idea/modules.xml
 .idea/react-blockly-component.iml
 .idea/vcs.xml
+/node_modules/*
